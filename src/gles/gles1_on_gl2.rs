@@ -1545,7 +1545,6 @@ impl GLES for GLES1OnGL2<'_> {
             self.state.pointer_is_fixed_point[0] = true;
             gl21::ColorPointer(size, gl21::FLOAT, stride, pointer)
         } else {
-            assert!(type_ == gl21::UNSIGNED_BYTE || type_ == gl21::FLOAT);
             self.state.pointer_is_fixed_point[0] = false;
             gl21::ColorPointer(size, type_, stride, pointer)
         }
@@ -1556,7 +1555,6 @@ impl GLES for GLES1OnGL2<'_> {
             self.state.pointer_is_fixed_point[1] = true;
             gl21::NormalPointer(gl21::FLOAT, stride, pointer)
         } else {
-            assert!(type_ == gl21::BYTE || type_ == gl21::SHORT || type_ == gl21::FLOAT);
             self.state.pointer_is_fixed_point[1] = false;
             gl21::NormalPointer(type_, stride, pointer)
         }
@@ -1581,8 +1579,6 @@ impl GLES for GLES1OnGL2<'_> {
             self.state.pointer_is_fixed_point[2] = true;
             gl21::TexCoordPointer(size, gl21::FLOAT, stride, pointer)
         } else {
-            // TODO: byte
-            assert!(type_ == gl21::SHORT || type_ == gl21::FLOAT);
             self.state.fixed_point_texture_units.remove(&active_texture);
             if self.state.fixed_point_texture_units.is_empty() {
                 self.state.pointer_is_fixed_point[2] = false;
@@ -1603,8 +1599,6 @@ impl GLES for GLES1OnGL2<'_> {
             self.state.pointer_is_fixed_point[3] = true;
             gl21::VertexPointer(size, gl21::FLOAT, stride, pointer)
         } else {
-            // TODO: byte
-            assert!(type_ == gl21::SHORT || type_ == gl21::FLOAT);
             self.state.pointer_is_fixed_point[3] = false;
             gl21::VertexPointer(size, type_, stride, pointer)
         }
